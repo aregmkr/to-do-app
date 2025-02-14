@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trying_learn/screens/home_screen.dart'
 ;
+import 'package:trying_learn/screens/main_screen.dart';
+import 'package:trying_learn/screens/settings_screen.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -9,7 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "To-Do List",
-      home: HomeScreen(),
+      home: MainScreen(),
     );
   }
 }

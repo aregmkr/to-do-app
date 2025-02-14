@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:trying_learn/styles/style.dart';
 
 class TaskWidget extends StatefulWidget {
-  final String task_text;
+  final Map<String, dynamic> task;
   final VoidCallback onDelete;
   final Function(String) onEdit;
   const TaskWidget({super.key,
-                  required this.task_text,
+                  required this.task,
                   required this.onDelete,
                   required this.onEdit});
 
@@ -22,7 +22,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   );
 
   void _editTask() {
-    TextEditingController _controller = TextEditingController(text: widget.task_text);
+    TextEditingController _controller = TextEditingController(text: widget.task['text']);
     FocusNode _focusNode = FocusNode();
     showDialog(
         context: context,
@@ -68,19 +68,20 @@ class _TaskWidgetState extends State<TaskWidget> {
       child: Row(
         children: [
           Checkbox(
-              value: isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  isChecked = value ?? false;
-                });
-              },
+            value: widget.task['checked'], // Load saved state
+            onChanged: (bool? value) {
+              setState(() {
+                widget.task['checked'] = value ?? false;
+              });
+              widget.onEdit(widget.task['text']); // Save change
+            },
           ),
-          Text(widget.task_text, style: TextStyle(
-              decoration: isChecked ? TextDecoration.lineThrough : null,
-              decorationColor: Colors.grey,
-              decorationThickness: 2.0,
-              fontSize: 20,
-              color: Colors.black
+          Text(widget.task['text'], style: TextStyle(
+            decoration: widget.task['checked'] ? TextDecoration.lineThrough : null,
+            decorationColor: Colors.grey,
+            decorationThickness: 2.0,
+            fontSize: 20,
+            color: widget.task['checked'] ? Colors.grey : Colors.black,
           ), ),
           Spacer(),
           PopupMenuButton<String>(
