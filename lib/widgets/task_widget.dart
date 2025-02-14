@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trying_learn/styles/style.dart';
+import 'package:intl/intl.dart';
 
 class TaskWidget extends StatefulWidget {
   final Map<String, dynamic> task;
@@ -18,7 +19,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   bool isChecked = false;
   TextStyle style_for_text = TextStyle(
       fontSize: 20,
-      color: Colors.black
   );
 
   void _editTask() {
@@ -64,7 +64,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Container (
-      width: 200,
       child: Row(
         children: [
           Checkbox(
@@ -76,14 +75,22 @@ class _TaskWidgetState extends State<TaskWidget> {
               widget.onEdit(widget.task['text']); // Save change
             },
           ),
-          Text(widget.task['text'], style: TextStyle(
-            decoration: widget.task['checked'] ? TextDecoration.lineThrough : null,
-            decorationColor: Colors.grey,
-            decorationThickness: 2.0,
-            fontSize: 20,
-            color: widget.task['checked'] ? Colors.grey : Colors.black,
-          ), ),
+          Expanded(
+            child: Text(widget.task['text'], style: TextStyle(
+              decoration: widget.task['checked'] ? TextDecoration.lineThrough : null,
+              decorationColor: Colors.grey,
+              decorationThickness: 2.0,
+              fontSize: 20,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 5,
+            ),
+          ),
           Spacer(),
+          Text(DateFormat('d-MM-yyyy').format(DateTime.now()), style: TextStyle(fontSize: 10),),
           PopupMenuButton<String>(
               onSelected: (value) {
                 if (value == 'edit') {
