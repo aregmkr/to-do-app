@@ -20,6 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     });
     _pageController.jumpToPage(index);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,17 +35,23 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_sharp), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: "Settings"),
         ],
         currentIndex: _selectedIndex,
         onTap: _onTapped,
       ),
-      floatingActionButton: _selectedIndex == 0 ? FloatingActionButton(
-        onPressed: () {
-          _homeScreenKey.currentState?.showAddDialog();
-        },
-        child: const Icon(Icons.add, color: Colors.black,),
-      ) : null,
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                _homeScreenKey.currentState?.showAddDialog();
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
+            )
+          : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

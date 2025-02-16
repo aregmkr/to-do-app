@@ -28,18 +28,19 @@ class HomeScreenState extends State<HomeScreen> {
     if (savedTasks != null) {
       setState(() {
         _tasks = savedTasks
-            .map((task) => Map<String, dynamic>.from(
-            {"text": task.split('|')[0], "checked": task.split('|')[1] == 'true'}))
+            .map((task) => Map<String, dynamic>.from({
+                  "text": task.split('|')[0],
+                  "checked": task.split('|')[1] == 'true'
+                }))
             .toList();
       });
     }
   }
 
-
   Future<void> _saveTasks() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> taskStrings =
-    _tasks.map((task) => "${task['text']}|${task['checked']}").toList();
+        _tasks.map((task) => "${task['text']}|${task['checked']}").toList();
     prefs.setStringList('tasks', taskStrings);
   }
 
@@ -66,10 +67,9 @@ class HomeScreenState extends State<HomeScreen> {
 
   void showAddDialog() {
     showDialog(
-        context: context,
-        builder: (BuildContext context)
-        {
-          return TaskDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return TaskDialog(
           onAddTask: addTask,
         );
       },
@@ -91,8 +91,7 @@ class HomeScreenState extends State<HomeScreen> {
               onDelete: () => deleteTask(index),
               onEdit: (newTask) => setText(index, newTask),
             );
-          },
-      ),
+          }),
     );
   }
 }
