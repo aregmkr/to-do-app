@@ -24,6 +24,13 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               Switch_Theme(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text(
+                  "Swipe completed tasks",
+                  style: TextStyle(color: Colors.deepPurpleAccent),
+                ),
+              ),
             ],
           ),
         ],

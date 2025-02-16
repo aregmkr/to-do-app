@@ -11,12 +11,14 @@ class Switch_Theme extends StatefulWidget {
 }
 
 class _Switch_ThemeState extends State<Switch_Theme> {
-  static const WidgetStateProperty<Icon> thumbIcon = WidgetStateProperty<Icon>.fromMap(
+  static const WidgetStateProperty<Icon> thumbIcon =
+      WidgetStateProperty<Icon>.fromMap(
     <WidgetStatesConstraint, Icon>{
       WidgetState.selected: Icon(Icons.nightlight_round),
       WidgetState.any: Icon(Icons.sunny),
     },
   );
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
